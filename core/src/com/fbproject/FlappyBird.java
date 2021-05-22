@@ -7,19 +7,16 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class FlappyBird extends Game {
 	public static final int HEIGHT = 800; 
 	public static final int WIDTH = 480; 
-	public static final String TITLE = "Legenda Ekor Terbang";
+	public static final String TITLE = TextInterface.titleText;
 	
 	SpriteBatch batch;	
 	ShapeRenderer shapeRenderer;
-
-	TextInterface text;
 	
 	@Override
 	public void create() {		
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
-		text = new TextInterface();
-		setScreen(new GameScene(this));
+		setScreen(new MainMenuScene(this));
 	}
 	
 	@Override

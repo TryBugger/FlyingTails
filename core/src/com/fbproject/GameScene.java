@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
@@ -24,6 +23,10 @@ public class GameScene extends ScreenAdapter {
     public GameScene(FlappyBird game) {
         this.game = game;
 
+    }
+
+    @Override
+    public void show() {
         bgTexture =  new Texture("SonicBackground.png");
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Poppins-SemiBoldItalic.ttf"));
@@ -62,7 +65,13 @@ public class GameScene extends ScreenAdapter {
         for(Pipe pipe : pipes) {
             pipe.despawn();
         }
+        font.dispose();
         bgTexture.dispose();
+    }
+
+    @Override
+    public void hide() {
+        Gdx.input.setInputProcessor(null);
     }
 
     private void drawObject() {		
@@ -77,26 +86,9 @@ public class GameScene extends ScreenAdapter {
 		tails.getSprite().draw(game.batch);
 		
 		font.setColor(245/255f, 130/255f, 15/255f, 1);				
-		font.draw(game.batch, Integer.toString(game.text.getScore()), 50f, FlappyBird.HEIGHT - 50f);        
+		font.draw(game.batch, Integer.toString(TextInterface.score), 50f, FlappyBird.HEIGHT - 50f);        
 		
-		game.batch.end();		
-		
-		// game.shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        // game.shapeRenderer.setColor(0, 0, 1, 1);
-        // game.shapeRenderer.rect(tails.getSprite().getX() + Tails.getHitboxReducer() / 2,
-        //         tails.getSprite().getY() + Tails.getHitboxReducer() / 2,
-        //         tails.getSprite().getWidth() - Tails.getHitboxReducer(),
-        //         tails.getSprite().getHeight() - Tails.getHitboxReducer());
-
-        // for (Pipe pipe : pipes) {
-        //     game.shapeRenderer.rect(pipe.getsPipeSide(0).getX(), pipe.getsPipeSide(0).getY(),
-        //             pipe.getsPipeSide(0).getWidth(), pipe.getsPipeSide(0).getHeight());
-
-        //     game.shapeRenderer.rect(pipe.getsPipeSide(1).getX(), pipe.getsPipeSide(1).getY(),
-        //             pipe.getsPipeSide(1).getWidth(), pipe.getsPipeSide(1).getHeight());
-        // }
-
-        // game.shapeRenderer.end();
+		game.batch.end();
 	}
 
     private boolean isPlayerCollided() {		
@@ -150,7 +142,7 @@ public class GameScene extends ScreenAdapter {
 				MathUtils.isEqual((tails.getSprite().getX() + Tails.getHitboxReducer() / 2), pipe.getsPipeSide(0).getX() + pipe.getsPipeSide(0).getWidth(), 0.5f)
 			)
 		) {			
-			game.text.addScore(POINT);
+			TextInterface.score += POINT;
 		}
 	}
 }

@@ -10,6 +10,9 @@ public class DesktopLauncher {
 		config.height = FlappyBird.HEIGHT;
 		config.width = FlappyBird.WIDTH;
 		config.title = FlappyBird.TITLE;
+
+		config.forceExit = true;
+
 		new LwjglApplication(new FlappyBird(), config);
 	}
 }

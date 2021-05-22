@@ -39,7 +39,7 @@ public class Pipe extends Entity {
     // serta menghitung ukuran tinggi pipa bawah
     public Pipe(float xPosition) {
         // membentuk objek tekstur yang menggunakan assets untuk objek pipa
-        texture = new Texture("Pipe.png");
+        texture = new Texture("WoodObstacle.png");
 
         // menghitung tinggi pipa bawah dengan perhitungan :
         // minimal tinggi + angka random (0 hingga tinggi maksimal (pipa bawah - minimal tinggi))
