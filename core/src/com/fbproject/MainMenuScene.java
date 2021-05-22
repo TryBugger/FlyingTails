@@ -14,7 +14,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.utils.Align;
 
 public class MainMenuScene extends ScreenAdapter {
-    FlappyBird game;
+    private FlappyBird game;
 
     private Texture bgTexture;
     private Texture tailsTexture;
@@ -32,6 +32,7 @@ public class MainMenuScene extends ScreenAdapter {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("DigitaltsOrange.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = 80;
+        //parameter.color = new Color(1f, 1f, 1f, 1f);
         font = generator.generateFont(parameter);
         generator.dispose();
         titleFont = new GlyphLayout(font, 
@@ -88,7 +89,6 @@ public class MainMenuScene extends ScreenAdapter {
                     220f,
                     Align.center,
                     true);
-
 
         tailsImage.setPosition((FlappyBird.WIDTH / 2) - (tailsImage.getWidth() / 2),
                 (FlappyBird.HEIGHT / 2) - (tailsImage.getHeight() / 2) - 150);

@@ -12,11 +12,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.Input.Keys;
 
 public class GameOverScene extends ScreenAdapter {
-    FlappyBird game;
+    private FlappyBird game;
 
     private Texture bgTexture;
-
-    TextInterface text;
 
     private BitmapFont font;
     private GlyphLayout scoreText;
@@ -28,9 +26,7 @@ public class GameOverScene extends ScreenAdapter {
 
     @Override
     public void show() {
-        bgTexture = new Texture("SonicBackground.png");
-
-        text = new TextInterface();
+        bgTexture = new Texture("jungleBackground.jpg");
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("anticlimax.regular.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -53,7 +49,7 @@ public class GameOverScene extends ScreenAdapter {
             @Override
             public boolean keyUp(int keycode) {
                 if(keycode == Keys.ENTER) {
-                    if(TextInterface.score > text.getHighScore()) {
+                    if(TextInterface.score > TextInterface.highScore) {
                         TextInterface.highScore = (TextInterface.score);
                     }
                     TextInterface.score = 0;

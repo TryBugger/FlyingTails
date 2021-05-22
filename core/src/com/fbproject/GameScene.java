@@ -2,7 +2,6 @@ package com.fbproject;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
@@ -11,7 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 public class GameScene extends ScreenAdapter {
-    FlappyBird game;
+    private FlappyBird game;
     
     private Tails tails;	
     private Array<Pipe> pipes;
@@ -22,7 +21,6 @@ public class GameScene extends ScreenAdapter {
 
     public GameScene(FlappyBird game) {
         this.game = game;
-
     }
 
     @Override
@@ -44,8 +42,6 @@ public class GameScene extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 
 		if (!isPlayerCollided()) {			
 			drawObject();
@@ -92,42 +88,41 @@ public class GameScene extends ScreenAdapter {
 	}
 
     private boolean isPlayerCollided() {		
-		boolean checker = false;		
-		
 		if(tails.getSprite().getY() <= 0 || tails.getSprite().getY() + tails.getSprite().getHeight() >= FlappyBird.HEIGHT) {
 			return true;
-		}		
+		}
 		
 		for(Pipe pipe : pipes) {			
-			checker = 
-			(				
-			((tails.getSprite().getY() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(0).getY() + pipe.getsPipeSide(0).getHeight())
-			&&
-			(				
-			((tails.getSprite().getX() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(0).getX() + pipe.getsPipeSide(0).getWidth()) 
-			&& 				
-			((tails.getSprite().getX() + Tails.getHitboxReducer() / 2)  + (tails.getSprite().getWidth() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(0).getX())
-			)
-			) 
-			|| 
-			(				
-			((tails.getSprite().getY() + Tails.getHitboxReducer() / 2) + (tails.getSprite().getHeight() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(1).getY())
-			&&
-			(				
-			((tails.getSprite().getX() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(1).getX() + pipe.getsPipeSide(1).getWidth()) 
-			&& 				
-			((tails.getSprite().getX() + Tails.getHitboxReducer() / 2)  + (tails.getSprite().getWidth() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(1).getX())
-			)
-			);			
-			
-			tailsThroughPipe(pipe);		
-			
-			if(checker) {
-				break;
+			if
+			(
+				(				
+				((tails.getSprite().getY() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(0).getY() + pipe.getsPipeSide(0).getHeight())
+				&&
+				(				
+				((tails.getSprite().getX() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(0).getX() + pipe.getsPipeSide(0).getWidth()) 
+				&& 				
+				((tails.getSprite().getX() + Tails.getHitboxReducer() / 2)  + (tails.getSprite().getWidth() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(0).getX())
+				)
+				) 
+				|| 
+				(				
+				((tails.getSprite().getY() + Tails.getHitboxReducer() / 2) + (tails.getSprite().getHeight() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(1).getY())
+				&&
+				(				
+				((tails.getSprite().getX() + Tails.getHitboxReducer() / 2) <= pipe.getsPipeSide(1).getX() + pipe.getsPipeSide(1).getWidth()) 
+				&& 				
+				((tails.getSprite().getX() + Tails.getHitboxReducer() / 2)  + (tails.getSprite().getWidth() - Tails.getHitboxReducer()) >= pipe.getsPipeSide(1).getX())
+				)
+				)
+			) {
+				tailsThroughPipe(pipe);
+				return true;
+			} else {
+				tailsThroughPipe(pipe);
 			}
 		}	
 		
-		return checker;
+		return false;
 	}
 	
 	private void tailsThroughPipe(Pipe pipe) {

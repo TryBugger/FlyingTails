@@ -11,6 +11,7 @@ import java.util.Random;
 // pengolahan class Pipe yang diinherit oleh class Entity
 public class Pipe extends Entity {
     // untuk mengatur lebar pipa / obstacle
+    // lebar kayu
     private static final int PIPE_WIDTH = 70;
     // untuk mengatur jarak antar pipa pada saat keseluruhan pipa dispawn
     private static final int PIPE_SPACING = 175;
@@ -19,6 +20,7 @@ public class Pipe extends Entity {
     // untuk mengatur total pipa yang dispawn
     private static final int PIPE_TOTAL = 4;
     // untuk mengatur jarak renggang antara pipa atas dengan pipa bawah
+    // lebar lubang
     private static final int PIPE_GAP = 125;
     // untuk mengatur kecepatan pipa berpindah kearah kiri / tails muncul
     private static final int SPEED = 70;

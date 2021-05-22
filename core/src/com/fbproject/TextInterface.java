@@ -10,14 +10,4 @@ public class TextInterface {
     public static String gameOver = "Game Over";
     // atribut menuText untuk tulisan menu utama
     public static String titleText = "Flying Tails";
-
-    // method untuk mereset skor yang didapatkan, jika mode permainan telah berakhir
-    //public void resetScore() {
-    //    score = 0;
-   // }
-
-    // method untuk mendapatkan nilai skor tertinggi pada saat game dijalankan 
-    public int getHighScore() {
-        return highScore;
-    }    
 }
